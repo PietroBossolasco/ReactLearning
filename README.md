@@ -41,8 +41,8 @@ You can download the latest version of Node.js from the official website: https:
 
 2. Download the CLI
 There are two main CLI:
-* expo CLI
-* react native CLI
+* expo CLI.
+* react native CLI.
 I personally reccomand the expo CLI, it's easier and it has some good template.
 For download it:
 ```
