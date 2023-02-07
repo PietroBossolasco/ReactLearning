@@ -18,7 +18,7 @@ class App extends React.Component {
         let temp = [];
 
         for (let item of response.data) {
-          temp.push(item.nome);
+          temp.push(item);
         }
 
         this.setState({ data: temp });
