@@ -5,6 +5,7 @@ import TodoItem from './components/TodoItem.js'
 import AddTodo from './components/addTodo.js'
 import Bottombar from './components/bottombar.js'
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import SandBox from './components/sandbox.js';
 
 export default function App() {
   const [todos, setToDos] = useState(
@@ -23,7 +24,7 @@ export default function App() {
   //     console.error(e);
   //   }
   // }
-  
+
   // const setStartItem = async () => {
   //   try {
   //     const value = await AsyncStorage.getItem("todo")
@@ -38,7 +39,7 @@ export default function App() {
   //   } catch (e) {
   //   }
   // }
-  
+
   // setStartItem();
   // console.log("Uscito")
 
@@ -49,7 +50,7 @@ export default function App() {
   }
 
   const submitHandler = (text) => {
-    if(text.length > 3){
+    if (text.length > 3) {
       setToDos((prevTodos) => {
         // let temp = [];
         // temp = prevTodos;
@@ -58,20 +59,22 @@ export default function App() {
         // temp.push({ text: text, key: id });
         // storeData('todo', JSON.stringify(temp));
         return [
-          {text: text, key : (parseInt(prevTodos[prevTodos.length - 1].key) + 1).toString()},
+          { text: text, key: (parseInt(prevTodos[prevTodos.length - 1].key) + 1).toString() },
           ...prevTodos
         ]
       })
     }
-    else{
+    else {
       Alert.alert("Opss...", "The length of the todo must be over 3 char", [
-        {text: 'Understood', onPress: () => console.log("Alert closed")}
+        { text: 'Understood', onPress: () => console.log("Alert closed") }
       ])
     }
 
   }
 
   return (
+    // <SandBox />
+
     <TouchableWithoutFeedback onPress={() => {
       Keyboard.dismiss();
     }}>
@@ -91,7 +94,7 @@ export default function App() {
             />
           </View>
         </View>
-        <Bottombar />
+        {/* <Bottombar /> */}
       </View>
     </TouchableWithoutFeedback>
   );
@@ -104,8 +107,10 @@ const styles = StyleSheet.create({
   },
   content: {
     padding: 40,
+    flex: 1
   },
   list: {
+    flex: 1,
     marginTop: 20,
   },
   text: {
