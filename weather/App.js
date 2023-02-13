@@ -1,13 +1,27 @@
-import { StatusBar } from 'expo-status-bar';
+import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { useFonts } from 'expo-font'
 import Home from "./pages/home.js";
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Home />
+  let [fontsLoaded] = useFonts({
+    'raleway-regular': require('./assets/fonts/Raleway-Regular.ttf'),
+    'raleway-bold': require('./assets/fonts/Raleway-Bold.ttf'),
+    'raleway-thin': require('./assets/fonts/Raleway-Thin.ttf'),
+  })
+
+  if (!fontsLoaded) {
+    <View>
+
     </View>
-  );
+  }
+  else {
+    return (
+      <View style={styles.container}>
+        <Home />
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({

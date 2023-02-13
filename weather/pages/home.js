@@ -2,31 +2,56 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, TextInput, Button, View, ScrollView, Dimensions } from 'react-native';
 import Searchbar from '../components/searchbar';
 import ActualWeather from '../components/actualWeather';
+import Today from '../components/today';
 
+import axios from 'axios';
 const position = "Rome";
 
 export default function Home() {
-    return (
-        <ScrollView style={{flex: 1}}>
+    const [load, setLoad] = useState(false)
+    const [data, setData] = useState(null);
+    
+    async function requireData() {
+        const response = axios
+            .get('http://api.weatherapi.com/v1/current.json?key=04859fec227b4f7db0a142925231202&q=' + position).then(
+                function (response) {
+                    setData(JSON.stringify((response).data))
+                    setLoad(true)
+                }
+            )
+    }
+
+    requireData();
+
+    if (!load) {
+        return (
             <View style={styles.main}>
-                <Searchbar />
-                {/* <Text style={styles.title}>Weather</Text> */}
-                <ActualWeather position={position}/>
             </View>
-        </ScrollView>
-    )
+        )
+    }
+
+    if (load) {
+        return (
+            <View style={styles.main}>
+                {/* <Searchbar /> */}
+                <ActualWeather position={position} data={data} />
+                <Today />
+            </View>
+        )
+    }
+
 }
 
 const styles = StyleSheet.create({
     main: {
+        flex: 1,
         backgroundColor: '#49A0FF',
-        width: Dimensions.get('window').width,
-        height: Dimensions.get('window').height + 33,
-        alignItems : "center",
-        paddingTop : 40
+        alignItems: "center",
+        paddingTop: 40
     },
-    title : {
+    title: {
+        fontFamily: "raleway-thin",
         color: 'white',
         fontSize: 26,
     }
-})
+});

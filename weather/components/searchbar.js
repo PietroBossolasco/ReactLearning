@@ -14,7 +14,7 @@ export default function Searchbar() {
 
     return (
         <View style={styles.container}>
-            <TextInput style={styles.input} placeholderTextColor="#FFF" placeholder='🔍︎ Posizione' onKeyPress={() => { 
+            <TextInput style={styles.input} placeholderTextColor="#FFF" placeholder='🔍︎ Location' onKeyPress={() => { 
                  searchPosition(text);
                 }} />
         </View>
