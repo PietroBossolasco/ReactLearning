@@ -7,6 +7,25 @@ export default function ActualWeather({ position, data }) {
 
     let iconPath = "";
 
+    if (data.current.condition.text == "Clear" && item.is_day == 0)
+        iconPath = require('../image/icon/moon.png')
+    else if (data.current.condition.text == "Clear" && item.is_day == 1)
+        iconPath = require('../image/icon/sun.png')
+    else if (data.current.condition.text == "Sunny")
+        iconPath = require('../image/icon/sun.png')
+    else if (data.current.condition.text == "Partly cloudy" && item.is_day == 0)
+        iconPath = require('../image/icon/cloudyNight.png');
+    else if (data.current.condition.text == "Cloudy")
+        iconPath = require('../image/icon/cloudyDay.png')
+    else if (data.current.condition.text == "Partly cloudy" && item.is_day == 1)
+        iconPath = require('../image/icon/partlyCloudy.png')
+    else if (data.current.condition.text == "Overcast")
+        iconPath = require('../image/icon/rain.png')
+    else if (data.current.condition.text.includes('snow'))
+        iconPath = require('../image/icon/snow.png')
+    else
+        iconPath = require('../image/icon/moon.png')
+
     return (
         <View style={styles.container}>
             <View style={styles.row}>
@@ -21,7 +40,7 @@ export default function ActualWeather({ position, data }) {
                         </View>
                     </View>
                 </View>
-                <Image style={styles.weatherLogo} source={(iconPath != "") ? require('../image/icon/sun.png') : require("../image/icon/sun.png")} />
+                <Image style={styles.weatherLogo} source={iconPath} />
             </View>
 
             <View style={styles.row}>

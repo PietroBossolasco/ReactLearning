@@ -3,14 +3,15 @@ import { StyleSheet, Text, TextInput, Button, View, ScrollView, Dimensions } fro
 import Searchbar from '../components/searchbar';
 import ActualWeather from '../components/actualWeather';
 import Today from '../components/today';
+import position from '../components/position';
+import Forecast from '../components/forecast';
 
 import axios from 'axios';
-const position = "Rome";
 
 export default function Home() {
     const [load, setLoad] = useState(false)
     const [data, setData] = useState(null);
-    
+
     async function requireData() {
         const response = axios
             .get('http://api.weatherapi.com/v1/current.json?key=04859fec227b4f7db0a142925231202&q=' + position).then(
@@ -32,11 +33,14 @@ export default function Home() {
 
     if (load) {
         return (
-            <View style={styles.main}>
-                {/* <Searchbar /> */}
-                <ActualWeather position={position} data={data} />
-                <Today />
-            </View>
+            <ScrollView>
+                <View style={styles.main}>
+                    <Searchbar />
+                    <ActualWeather position={position} data={data} />
+                    <Today />
+                    <Forecast />
+                </View>
+            </ScrollView>
         )
     }
 
@@ -44,10 +48,10 @@ export default function Home() {
 
 const styles = StyleSheet.create({
     main: {
-        flex: 1,
+        // flex: 1,
         backgroundColor: '#49A0FF',
         alignItems: "center",
-        paddingTop: 40
+        paddingTop: 20
     },
     title: {
         fontFamily: "raleway-thin",

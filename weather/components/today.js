@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image, FlatList } from 'react-native';
 import axios from 'axios';
-
-const position = "Rome";
+import position from '../components/position';
 
 export default function Today() {
     const [load, setLoad] = useState(false)
@@ -31,6 +30,25 @@ export default function Today() {
         let array = [];
 
         for (let item of JSON.parse(data).forecast.forecastday[0].hour) {
+            if (item.condition.text == "Clear" && item.is_day == 0)
+                item.condition.icon = require('../image/icon/moon.png')
+            else if (item.condition.text == "Clear" && item.is_day == 1)
+                item.condition.icon = require('../image/icon/sun.png')
+            else if (item.condition.text == "Sunny")
+                item.condition.icon = require('../image/icon/sun.png')
+            else if (item.condition.text == "Partly cloudy" && item.is_day == 0)
+                item.condition.icon = require('../image/icon/cloudyNight.png');
+            else if (item.condition.text == "Cloudy")
+                item.condition.icon = require('../image/icon/cloudyDay.png')
+            else if (item.condition.text == "Partly cloudy" && item.is_day == 1)
+                item.condition.icon = require('../image/icon/partlyCloudy.png')
+            else if (item.condition.text == "Overcast")
+                item.condition.icon = require('../image/icon/rain.png')
+            else if (item.condition.text.includes('snow'))
+                item.condition.icon = require('../image/icon/snow.png')
+            else
+                item.condition.icon = require('../image/icon/moon.png')
+
             array.push(item);
         }
 
@@ -44,7 +62,7 @@ export default function Today() {
                         renderItem={({ item }) => (
                             <View style={styles.item}>
                                 <Text style={styles.hour}>{item.time.substring(11, 13)}</Text>
-                                <Image source={require('../image/icon/sun.png')} style={{ width: 50, height: 50 }} />
+                                <Image source={item.condition.icon} style={{ width: 50, height: 50 }} />
                                 <Text style={styles.temp}>{item.temp_c}°C</Text>
                             </View>
                         )}
@@ -61,14 +79,14 @@ const styles = StyleSheet.create({
         fontSize: 26,
         fontFamily: 'raleway-regular',
         marginBottom: 20,
-        marginLeft : 30
+        marginLeft: 30
     },
     main: {
         width: '100%',
         flex: 1,
         backgroundColor: '#49A0FF',
         textAlign: 'left',
-        paddingTop: 40,
+        paddingTop: 20,
     },
     item: {
         backgroundColor: '#ffffff30',
