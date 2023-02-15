@@ -11,10 +11,11 @@ import axios from 'axios';
 export default function Home() {
     const [load, setLoad] = useState(false)
     const [data, setData] = useState(null);
+    const [pos, setPos] = useState(position());
 
     async function requireData() {
         const response = axios
-            .get('http://api.weatherapi.com/v1/current.json?key=04859fec227b4f7db0a142925231202&q=' + position).then(
+            .get('http://api.weatherapi.com/v1/current.json?key=04859fec227b4f7db0a142925231202&q=' + pos).then(
                 function (response) {
                     setData(JSON.stringify((response).data))
                     setLoad(true)
@@ -36,7 +37,7 @@ export default function Home() {
             <ScrollView>
                 <View style={styles.main}>
                     <Searchbar />
-                    <ActualWeather position={position} data={data} />
+                    <ActualWeather position={pos} data={data} />
                     <Today />
                     <Forecast />
                 </View>
@@ -48,7 +49,7 @@ export default function Home() {
 
 const styles = StyleSheet.create({
     main: {
-        // flex: 1,
+        flex: 1,
         backgroundColor: '#49A0FF',
         alignItems: "center",
         paddingTop: 20

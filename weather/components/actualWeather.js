@@ -7,17 +7,17 @@ export default function ActualWeather({ position, data }) {
 
     let iconPath = "";
 
-    if (data.current.condition.text == "Clear" && item.is_day == 0)
+    if (data.current.condition.text == "Clear" && data.current.is_day == 0)
         iconPath = require('../image/icon/moon.png')
-    else if (data.current.condition.text == "Clear" && item.is_day == 1)
+    else if (data.current.condition.text == "Clear" && data.current.is_day == 1)
         iconPath = require('../image/icon/sun.png')
     else if (data.current.condition.text == "Sunny")
         iconPath = require('../image/icon/sun.png')
-    else if (data.current.condition.text == "Partly cloudy" && item.is_day == 0)
+    else if (data.current.condition.text == "Partly cloudy" && data.current.is_day == 0)
         iconPath = require('../image/icon/cloudyNight.png');
     else if (data.current.condition.text == "Cloudy")
         iconPath = require('../image/icon/cloudyDay.png')
-    else if (data.current.condition.text == "Partly cloudy" && item.is_day == 1)
+    else if (data.current.condition.text == "Partly cloudy" && data.current.is_day == 1)
         iconPath = require('../image/icon/partlyCloudy.png')
     else if (data.current.condition.text == "Overcast")
         iconPath = require('../image/icon/rain.png')

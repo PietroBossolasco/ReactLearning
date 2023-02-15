@@ -9,7 +9,7 @@ export default function Today() {
 
     async function requireData() {
         const response = axios
-            .get('http://api.weatherapi.com/v1/forecast.json?key=04859fec227b4f7db0a142925231202&q=' + position).then(
+            .get('http://api.weatherapi.com/v1/forecast.json?key=04859fec227b4f7db0a142925231202&q=' + position()).then(
                 function (response) {
                     setData(JSON.stringify((response).data))
                     setLoad(true);
@@ -30,6 +30,8 @@ export default function Today() {
         let array = [];
 
         for (let item of JSON.parse(data).forecast.forecastday[0].hour) {
+            console.log(item.time.substring(11, 13) + "----" + item.condition.text + "----" + item.is_day)
+
             if (item.condition.text == "Clear" && item.is_day == 0)
                 item.condition.icon = require('../image/icon/moon.png')
             else if (item.condition.text == "Clear" && item.is_day == 1)
@@ -42,12 +44,12 @@ export default function Today() {
                 item.condition.icon = require('../image/icon/cloudyDay.png')
             else if (item.condition.text == "Partly cloudy" && item.is_day == 1)
                 item.condition.icon = require('../image/icon/partlyCloudy.png')
-            else if (item.condition.text == "Overcast")
+            else if (item.condition.text == "Overcast" || item.condition.text.includes('rain'))
                 item.condition.icon = require('../image/icon/rain.png')
             else if (item.condition.text.includes('snow'))
                 item.condition.icon = require('../image/icon/snow.png')
             else
-                item.condition.icon = require('../image/icon/moon.png')
+                item.condition.icon = require('../image/icon/sun.png')
 
             array.push(item);
         }
