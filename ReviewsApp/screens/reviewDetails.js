@@ -1,18 +1,21 @@
 import React from "react";
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { Text, View } from 'react-native';
 import { globalStyles } from "../styles/global";
+import Card from "../shared/card";
 
-export default function ReviewDetails({ navigation }) {
-    let stars = navigation.getParam('rating');
+export default function ReviewDetails({ route }) {
+    let stars = route.params.rating;
     let print = ""
-    for(let i=0; i < stars; i++)
+    for (let i = 0; i < stars; i++)
         print += "⭐"
 
-    return(
+    return (
         <View style={styles.container}>
-            <Text style={styles.titleText}>{ navigation.getParam('title') }</Text>
-            <Text style={styles.paragraph}>{ navigation.getParam('body') }</Text>
-            <Text style={styles.titleText}>{print}</Text>
+            <Card>
+                <Text style={styles.titleText}>{route.params.title}</Text>
+                <Text style={styles.paragraph}>{route.params.body}</Text>
+                <Text style={styles.titleText}>{print}</Text>
+            </Card>
         </View>
     )
 }

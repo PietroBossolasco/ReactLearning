@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useFonts } from 'expo-font'
 import Loading from './screens/loading.js'
-import Navigator from './routes/homeStack'
 import { AppNavigator } from './routes/drawer'
 
 export default function App() {

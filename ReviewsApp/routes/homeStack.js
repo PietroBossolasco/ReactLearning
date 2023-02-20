@@ -8,8 +8,8 @@ const { Navigator, Screen } = createStackNavigator();
 
 export const HomeStack = () => (
   <Navigator
-    headerMode='screen'
-    screenOptions={{
+  screenOptions={{
+      headerMode:'float',
       headerStyle: {
         backgroundColor: '#eee',
       },
