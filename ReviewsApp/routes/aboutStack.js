@@ -6,8 +6,8 @@ const { Navigator, Screen } = createStackNavigator();
 
 export const AboutStack = () => (
     <Navigator
-        headerMode='screen'
-        screenOptions={{
+    screenOptions={{
+            headerMode:'screen',
             headerStyle: {
                 backgroundColor: '#eee'
             },
