@@ -26,6 +26,10 @@ export const globalStyles = StyleSheet.create({
         borderRadius: 6,
         marginTop: 10,
         marginBottom: 10
+    },
+    errorText : {
+        color: 'crimson',
+        fontWeight: 'bold'
     }
 })
 
