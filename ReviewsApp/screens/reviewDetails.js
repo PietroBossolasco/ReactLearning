@@ -4,6 +4,7 @@ import { globalStyles, images } from "../styles/global";
 import Card from "../shared/card";
 
 export default function ReviewDetails({ route }) {
+    console.log(route)
     return (
         <View style={globalStyles.container}>
             <Card>
